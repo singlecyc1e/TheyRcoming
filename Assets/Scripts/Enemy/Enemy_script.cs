@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy_script : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class Enemy_script : MonoBehaviour
 
         if (other.tag == "LeftBound")
         {
+            Debug.Log(1);
             EnemySpawn.EnemyS.direction = -1;
             EnemySpawn.EnemyS.downstate = true;
         }
@@ -78,10 +80,16 @@ public class Enemy_script : MonoBehaviour
             EnemySpawn.EnemyS.direction = 1;
             EnemySpawn.EnemyS.downstate = true;
         }
-        
 
+        if (other.tag == "DownBound")
+        {
+            SceneManager.LoadScene("End");
+            Debug.Log(2);
+        }
         //explosion here
     }
+
+
 
     private void MoveDown()
     {
@@ -91,7 +99,8 @@ public class Enemy_script : MonoBehaviour
     private void Shooting()
     {
         Instantiate(Enemybullet, this.transform.position, Quaternion.identity);
-        Instantiate(due);
+        AudioSource temp =  Instantiate(due);
+     
     
     }
 

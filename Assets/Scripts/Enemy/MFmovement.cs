@@ -5,6 +5,7 @@ using UnityEngine;
 public class MFmovement : MonoBehaviour
 {
     public float speed = 2f;
+    public AudioSource pass;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,8 @@ public class MFmovement : MonoBehaviour
     {
         if (other.tag == "Bullet")
         {
-    
+            GameObject.Find("Player").GetComponent<Shooting>().firestate = true;
+            Instantiate(pass);
             Destroy(other.gameObject);
             Destroy(this.gameObject);
 
@@ -31,7 +33,7 @@ public class MFmovement : MonoBehaviour
         {
             Destroy(this.gameObject);
             
-            //init "pass" sound and add extra score
+     
         }
     }
 }

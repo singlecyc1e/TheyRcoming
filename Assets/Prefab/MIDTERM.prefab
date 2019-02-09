@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  pass: {fileID: 6771132119251717195, guid: 0d607878cfe01fe4d851d2bf93e2b24f, type: 3}
 --- !u!61 &220116098316895351
 BoxCollider2D:
   m_ObjectHideFlags: 0

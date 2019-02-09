@@ -21,4 +21,9 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Move");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

@@ -54,7 +54,6 @@ public class Player_Movement : MonoBehaviour
 
     IEnumerator Waiter()
     {
-        Debug.Log(Time.time);
         Time.timeScale = .0000001f;
         failstate = true;
         animator.SetInteger("Direction", 4);

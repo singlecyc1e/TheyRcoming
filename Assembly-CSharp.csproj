@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Player\Shooting.cs" />
     <Compile Include="Assets\Scripts\Ray.cs" />
     <Compile Include="Assets\Scripts\StartMenu.cs" />
+    <Compile Include="Assets\Scripts\UIcontroller.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/30648/Documents/MidtermInvader/TheyRcoming/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
