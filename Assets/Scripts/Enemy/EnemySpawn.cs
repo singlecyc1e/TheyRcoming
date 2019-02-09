@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
+    public static EnemySpawn EnemyS;
     public GameObject Enemy;
+    public GameObject Midterm;
+    public GameObject Final;
     public Transform SpawnPoint;
+    public Transform FMPoint;
     private GameObject Temp;
     public GameObject[,] EnemyGroup;
-    public float leftposition;
-    public float rightposition;
     public bool firestate;
     public bool downstate = false;
     public int downcounter = 0;
     public int listcounter = 0;
-    private int leftnumber = 0;
-    private int rightnumber = 9;
     public int direction = -1;
+    public int level = 0;
+    private int canborn = 0;
 
+    private void Awake()
+    {
+        EnemyS = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,48 +41,25 @@ public class EnemySpawn : MonoBehaviour
             }
         }
 
-        leftposition = SpawnPoint.position.x - 4F;
-        rightposition = SpawnPoint.position.x + 1.6f ;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!IsEmpty())
+        if (level == 4 && canborn == 0)
         {
-            if (LeftIsNull() )
-            {
-                leftposition -= 1.8f;
-            }
+            Instantiate(Midterm, FMPoint.position, Quaternion.identity);
+            canborn++;
+        };
 
-            if (RightIsNull())
-            {
-                rightposition += 1.8f;
-            }
-        }
+        if (level == 7 && canborn == 1)
+        {
+            canborn++;
+            Instantiate(Final, FMPoint.position, Quaternion.identity);
+        };
 
     }
 
-    private bool LeftIsNull()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (EnemyGroup[i, leftnumber] != null){ return false; }
-        }
-        leftnumber++;
-        return true;
-    }
-
-    private bool RightIsNull()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (EnemyGroup[i, rightnumber] != null) { return false; }
-        }
-        rightnumber--;
-        return true;
-    }
 
     private bool IsEmpty()
     {

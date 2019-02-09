@@ -9,7 +9,6 @@ public class Enemy_script : MonoBehaviour
     public AudioSource due;
     public float speed = 2f;
     public bool firestate = true;
-    private float direction = 1f;
     private int rnumber;
     private int row_index;
     private int col_index;
@@ -20,7 +19,7 @@ public class Enemy_script : MonoBehaviour
 
     private void Update()
     {
-        datalibrary = GameObject.Find("Enemy").GetComponent<EnemySpawn>();
+        datalibrary = EnemySpawn.EnemyS;
 
         lowest = NoEnemyinthisdirection(Vector2.down);
         rnumber = Random.Range(0, 2000);
@@ -37,22 +36,21 @@ public class Enemy_script : MonoBehaviour
                 }
             }
         }
-        //if (this.transform.position.x > datalibrary.rightposition + col_index * 1.8) { direction = 1f; }
-        //if (this.transform.position.x < datalibrary.leftposition + col_index * 1.8) { direction = -1f; }
+
         Move(datalibrary.direction);
-        if (datalibrary.downstate) {MoveDown(); datalibrary.downcounter++;}
-        if (datalibrary.downcounter == datalibrary.listcounter) { datalibrary.downstate = false; datalibrary.downcounter = 0; }
+        if (datalibrary.downstate) {MoveDown(); datalibrary.downcounter++; }
+        if (datalibrary.downcounter == datalibrary.listcounter) { datalibrary.downstate = false; datalibrary.downcounter = 0; datalibrary.level++; }
 
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("BOOM!!!");
+
         if (other.tag == "Bullet")
         {
             GameObject.Find("Player").GetComponent<Shooting>().firestate = true;
-            datalibrary = GameObject.Find("Enemy").GetComponent<EnemySpawn>();
+            datalibrary = EnemySpawn.EnemyS;
             for (int i = 0; i < 5; i++)
             {
                 for (int k = 0; k < 11; k++)
@@ -71,14 +69,14 @@ public class Enemy_script : MonoBehaviour
 
         if (other.tag == "LeftBound")
         {
-            GameObject.Find("Enemy").GetComponent<EnemySpawn>().direction = -1;
-            GameObject.Find("Enemy").GetComponent<EnemySpawn>().downstate = true;
+            EnemySpawn.EnemyS.direction = -1;
+            EnemySpawn.EnemyS.downstate = true;
         }
 
         if (other.tag == "RightBound")
         {
-            GameObject.Find("Enemy").GetComponent<EnemySpawn>().direction = 1;
-            GameObject.Find("Enemy").GetComponent<EnemySpawn>().downstate = true;
+            EnemySpawn.EnemyS.direction = 1;
+            EnemySpawn.EnemyS.downstate = true;
         }
         
 
@@ -94,7 +92,7 @@ public class Enemy_script : MonoBehaviour
     {
         Instantiate(Enemybullet, this.transform.position, Quaternion.identity);
         Instantiate(due);
-        due.Play();
+    
     }
 
     private void Move(float direction)

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour {
     // Use this for initialization
+    public static Shooting Shoot;
     public bool firestate = true;
     public GameObject bullet;
     public Transform firepoint;
-	void Start () {
-		
+
+	void Awake () {
+        Shoot = this;
 	}
 	
 	// Update is called once per frame
