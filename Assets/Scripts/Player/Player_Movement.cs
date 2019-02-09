@@ -9,11 +9,18 @@ public class Player_Movement : MonoBehaviour
     public int health = 3;
     public float speed = 5f;
     public Animator animator;
+    public bool failstate = false;
+
     void Update()
     {
 
         //this.transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0) * speed * Time.deltaTime);
         this.GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxisRaw("Horizontal"), 0) * speed ;
+
+        if (failstate)
+        {
+            animator.SetInteger("Direction", 4);
+        }
 
         if (Input.GetKey(KeyCode.A) |  Input.GetKey(KeyCode.LeftArrow) )
         {
@@ -26,21 +33,36 @@ public class Player_Movement : MonoBehaviour
             animator.SetInteger("Direction", 2);
         }
 
-        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.LeftArrow))
+        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.LeftArrow) && !failstate)
         {
             animator.SetInteger("Direction", 0);
         }
+
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "EnemyBullet") {
             health--;
-            transform.position = rebirthpoint.position;
             Destroy(collision.collider.gameObject);
-            if (health == 0) {SceneManager.LoadScene("End"); }
+            animator.SetInteger("Direction", 4);
+            StartCoroutine(Waiter());
         }
 
+    }
+
+    IEnumerator Waiter()
+    {
+        Debug.Log(Time.time);
+        Time.timeScale = .0000001f;
+        failstate = true;
+        animator.SetInteger("Direction", 4);
+        yield return new WaitForSeconds(1* .0000001f);
+        failstate = false;
+        transform.position = rebirthpoint.position;
+        Time.timeScale = 1;
+        if (health == 0) { SceneManager.LoadScene("End"); }
     }
 }
  
