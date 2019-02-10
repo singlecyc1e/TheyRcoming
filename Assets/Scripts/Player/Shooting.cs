@@ -7,6 +7,7 @@ public class Shooting : MonoBehaviour {
     public bool firestate = true;
     public GameObject bullet;
     public Transform firepoint;
+
 	void Start () {
 		
 	}

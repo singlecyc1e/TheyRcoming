@@ -48,7 +48,7 @@ public class Enemy_script : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("BOOM!!!");
+        //Debug.Log("BOOM!!!");
         if (other.tag == "Bullet")
         {
             GameObject.Find("Player").GetComponent<Shooting>().firestate = true;
