@@ -105,7 +105,7 @@ public class EnemySpawn : MonoBehaviour
             for (int k = 0; k < 11; k++)
             {
                 Temp = Instantiate(Enemy, SpawnPoint.position + new Vector3(k * 1.25f, i * 1f), Quaternion.identity);
-                Temp.GetComponent<Enemy_script>().speed = speed;
+                //Temp.GetComponent<Enemy_script>().getSpeed() = speed;
                 if (i < 2) { Temp.GetComponent<Enemy_script>().score = 10; }
                 if (2 <= i && i < 4) { Temp.GetComponent<Enemy_script>().score = 20; }
                 if (i >= 4) { Temp.GetComponent<Enemy_script>().score = 40; }
