@@ -8,7 +8,7 @@ public class Enemy_script : MonoBehaviour
     public GameObject Enemybullet;
     public EnemySpawn datalibrary;
     public AudioSource due;
-    public float speed = 2f;
+    [SerializeField] private float speed = 0.7f;
     public bool firestate = true;
     private int rnumber;
     private int row_index;
@@ -128,4 +128,10 @@ public class Enemy_script : MonoBehaviour
         }
         return true;
     }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
+
 }
