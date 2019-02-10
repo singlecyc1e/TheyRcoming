@@ -15,6 +15,7 @@ public class Enemy_script : MonoBehaviour
     private int col_index;
     [SerializeField] private bool lowest = false;
     RaycastHit2D[] _hit;
+    public int score = 10;
 
 
 
@@ -51,6 +52,7 @@ public class Enemy_script : MonoBehaviour
         if (other.tag == "Bullet")
         {
             GameObject.Find("Player").GetComponent<Shooting>().firestate = true;
+            GameObject.Find("UIcontroller").GetComponent<UIcontroller>().scores += score;
             datalibrary = EnemySpawn.EnemyS;
             for (int i = 0; i < 5; i++)
             {
@@ -70,7 +72,7 @@ public class Enemy_script : MonoBehaviour
 
         if (other.tag == "LeftBound")
         {
-            Debug.Log(1);
+
             EnemySpawn.EnemyS.direction = -1;
             EnemySpawn.EnemyS.downstate = true;
         }
@@ -84,12 +86,19 @@ public class Enemy_script : MonoBehaviour
         if (other.tag == "DownBound")
         {
             SceneManager.LoadScene("End");
-            Debug.Log(2);
         }
+
+        if (other.tag == "Player")
+        {
+            SceneManager.LoadScene("End");
+        }
+
+
+        if (other.tag == "Wall") { Destroy(other.gameObject); }
         //explosion here
     }
 
-
+    
 
     private void MoveDown()
     {

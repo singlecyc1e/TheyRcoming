@@ -15,12 +15,14 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         this.transform.Translate(Vector2.down * bulletspeed * Time.deltaTime);
-        if ((start - this.transform.position.y) > 10f)
-        {
-            GameObject.Find("Enemy").GetComponent<EnemySpawn>().firestate = true;
-            Destroy(this.gameObject);
-        }
+        
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "DownBound") { Destroy(this.gameObject); }
+        if (collision.collider.tag == "Wall") { Destroy(this.gameObject); }
     }
 }
