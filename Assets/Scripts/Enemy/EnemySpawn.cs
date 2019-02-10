@@ -21,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
     public int direction = -1;
     public int level = 0;
     private int canborn = 0;
-    private float speed = 2;
+    private float speed = 1.7f;
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class EnemySpawn : MonoBehaviour
         {
             for (int k = 0; k < 11; k++)
             {
-                Temp = Instantiate(Enemy, SpawnPoint.position + new Vector3(k*1.25f,i*1f), Quaternion.identity);
+                Temp = Instantiate(Enemy, SpawnPoint.position + new Vector3(k*1.15f,i*0.9f), Quaternion.identity);
                 if (i < 2) { Temp.GetComponent<Enemy_script>().score = 10; }
                 if (2 <= i && i < 4) { Temp.GetComponent<Enemy_script>().score = 20; }
                 if (i >= 4) { Temp.GetComponent<Enemy_script>().score = 40; }
@@ -104,7 +104,7 @@ public class EnemySpawn : MonoBehaviour
         {
             for (int k = 0; k < 11; k++)
             {
-                Temp = Instantiate(Enemy, SpawnPoint.position + new Vector3(k * 1.25f, i * 1f), Quaternion.identity);
+                Temp = Instantiate(Enemy, SpawnPoint.position + new Vector3(k * 1.15f, i * 0.9f), Quaternion.identity);
                 Temp.GetComponent<Enemy_script>().speed = speed;
                 if (i < 2) { Temp.GetComponent<Enemy_script>().score = 10; }
                 if (2 <= i && i < 4) { Temp.GetComponent<Enemy_script>().score = 20; }
